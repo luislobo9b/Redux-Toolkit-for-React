@@ -1,7 +1,7 @@
 # Como usar o Redux Toolkit no React + TS com Vite
 Passo a passo do tutorial Quick Start do RTK aplicado no Vite
 
-## 1. Crie um projeto com Vite
+## 1. Crie um projeto com Vite (React + TS)
 Acesse o site [Getting Started | Vite](https://vite.dev/guide/)
 
 ## 2. Instale o Redux Toolkit para React
@@ -26,6 +26,116 @@ Importe o counterReducer ao store.
 
 ## 8. Convertendo o counter react (useState) para RTK (useSelector, useDispatch)
 Aqui finalizamos o projeto transformando o contador inicial do Vite em um contador do RTK.
+
+# Links úteis
+[Documentação oficial](https://redux-toolkit.js.org/)
+
+[Create A React Redux App](https://redux-toolkit.js.org/introduction/getting-started#create-a-react-redux-app)
+
+## Extensão para navegador (veja o histórico de atualizações no estado)
+[Redux DevTools - Chrome](https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+
+[Redux DevTools - Firefox](https://addons.mozilla.org/pt-BR/firefox/addon/reduxdevtools/)
+
+---
+
+# Glossário Redux Toolkit (RTK)
+### **Store**
+Centraliza o estado e os métodos de gerenciamento no Redux.
+
+- Importa o `configureStore` do RTK.
+
+**Exemplo:**
+
+`import { configureStore } from '@reduxjs/toolkit';`
+
+- Importa os reducers dos slices.
+
+**Exemplo:**
+
+`import counterReducer from './counterSlice'; const store = configureStore({ reducer: { counter: counterReducer } });`
+
+### **Slice**
+Parte do estado com reducers e actions específicas.
+
+- Importa o `createSlice` do RTK.
+
+**Exemplo:**
+
+`import { createSlice } from '@reduxjs/toolkit';`
+
+- Contém: **Reducers** (lógica de atualização do estado) e **Actions** (geradores de ações).
+- Depende do **Immer** internamente para manipulação imutável.
+- Exporta as **actions** para o código e o **reducer** (por padrão) para o store.
+**Exemplo:**
+
+`export const { increment, decrement } = counterSlice.actions; export default counterSlice.reducer;`
+
+### **app.js**
+- Importa o `store`.
+
+**Exemplo:**
+
+`import store from './store';`
+
+- Importa as **actions** do slice.
+
+**Exemplo:**
+
+`import { increment } from './counterSlice';`
+
+### **Reducers**
+Funções que atualizam o estado com base em uma ação.
+
+### **Actions**
+Objetos que descrevem eventos para mudar o estado.
+
+### **Select**
+Função para acessar valores do estado atual usando a função getState
+
+## **selectCounter (getCounter)**
+- Seleciona um valor do estado atual.
+
+**Exemplo:**
+
+`function selectCounter() { return store.getState().counter.value; }`
+
+### **Dispatch**
+Envia ações para alterar o estado.
+
+## **setCounter**
+- Atualiza o estado usando `dispatch`.
+
+**Exemplo:**
+
+`store.dispatch(setCounter(value));`
+
+### **Subscribe**
+Escuta mudanças no estado do store.
+
+- Inscreve-se no `store` para receber atualizações.
+
+**Exemplo:**
+
+`store.subscribe(() => { console.log('State changed:', store.getState()); });`
+
+### **State**
+O estado atual armazenado no store.
+
+- O estado atual do `store`.
+
+**Exemplo:**
+
+`const state = store.getState();`
+
+### **Payload**
+Dados enviados junto com uma ação
+
+- A informação enviada em uma **action**.
+
+**Exemplo:**
+
+`const action = { type: 'counter/increment', payload: 10 };`
 
 ---
 
